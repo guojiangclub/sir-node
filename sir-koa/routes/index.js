@@ -16,4 +16,27 @@ router.get('/json', async (ctx, next) => {
   }
 })
 
+router.post('/card', async (ctx, next) => {
+  ctx.body = {
+    title: 'koa2 json'
+  }
+})
+//首页列表
+router.get('/card', async (ctx, next) => {
+  ctx.body = {
+    title: 'koa2 json'
+  }
+})
+//打卡
+router.post('/card', async (ctx, next) => {
+  ctx.body = {
+    title: 'koa2 json'
+  }
+})
+//点赞
+router.post('/praise', async (ctx, next) => {
+  ctx.body = {
+    title: 'koa2 json'
+  }
+})
 module.exports = router
