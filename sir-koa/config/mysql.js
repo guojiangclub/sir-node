@@ -6,6 +6,6 @@ const Config = {
     port:3306,
     multipleStatements: true// 允许多条 sql 同时执行
 }
-export {
+exports= {
     Config
 }

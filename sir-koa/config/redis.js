@@ -6,6 +6,6 @@ const Config = {
         
     }
 }
-export {
+exports={
     Config
 }
