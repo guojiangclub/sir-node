@@ -17,6 +17,5 @@ class response {
         this.data = data
         return JSON.stringify(this)
     }
-
 }
 module.exports = response

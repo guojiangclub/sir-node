@@ -1,11 +1,9 @@
 const Config = {
-    host     : 'localhost',
-    password : '123456',
-    port:3306,
-    options:{
-        
-    }
+    host: "127.0.0.1", // Redis host
+    port: 6379, // Redis port
+    password: "",
+    db: 0,
 }
-exports={
+exports = {
     Config
 }
