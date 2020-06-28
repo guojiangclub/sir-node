@@ -1,10 +1,11 @@
 
 const miniappConfig = require('../../config/miniapp')
 const koa2Req = require('koa2-request')
-const response = require('../core/response')
+
 const userModel = require('../model/usermodel')
 const request = require('koa2-request')
 const { md5 } = require('../util/cryp')
+const response = require('../core/response')
 const Redis = require('../model/redis')
 const redis = new Redis()
 const resp = new response()

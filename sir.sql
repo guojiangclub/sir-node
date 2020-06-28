@@ -15,6 +15,9 @@ ENGINE=InnoDB;
 CREATE TABLE `card` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL DEFAULT 0 comment "用户id",
+	`content` VARCHAR(200) NOT NULL DEFAULT '' comment "内容",
+	`image` VARCHAR(200) NOT NULL DEFAULT '' comment "图片",
+	`praise` int(10) NOT NULL DEFAULT '' comment "点赞",
 	PRIMARY KEY (`id`)
 )COMMENT='打卡表'
 COLLATE='utf8mb4_general_ci'
@@ -27,6 +30,6 @@ CREATE TABLE `test` (
     `content` VARCHAR(255) NOT NULL DEFAULT '' ,
     `author` VARCHAR(30) NOT NULL DEFAULT '' ,
 	PRIMARY KEY (`id`)
-)COMMENT='打卡表'
+)COMMENT='测试表'
 COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB;
