@@ -20,14 +20,17 @@ router.get('/json', async (ctx, next) => {
 
 //首页列表
 router.get('/card', async (ctx, next) => {
-  indexApi.getCard(ctx)
+  return indexApi.getCard(ctx)
 })
 //打卡
 router.post('/card', async (ctx, next) => {
-  indexApi.addCard(ctx)
+  return indexApi.addCard(ctx)
 })
 //点赞
 router.post('/praise', async (ctx, next) => {
-  indexApi.praise(ctx)
+  return indexApi.praise(ctx)
+})
+router.post('/upload', async (ctx, next) => {
+  return indexApi.upload(ctx)
 })
 module.exports = router

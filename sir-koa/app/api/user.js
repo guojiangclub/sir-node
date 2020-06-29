@@ -39,8 +39,7 @@ const wxUser = async (code) => {
 }
 const login = async(ctx) => {
     const phone = ctx.request.body.phone
-    const userId = 1
-    console.log("uid",userId)
+    const userId = ctx.state.userId
     
     const res = await userModel.updateUser(userId,phone)
     
