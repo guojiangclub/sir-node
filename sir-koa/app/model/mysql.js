@@ -20,8 +20,14 @@ const { Config } = require('../../config/mysql')
     })
     return promise
 }
+async function  queryOne(sql,params){
+    res =await exec(sql,params)
+    console.log(res);
+    
+    return res ? res[0] : []
+}
 
 module.exports = {
-    exec,
+    exec,queryOne,
     escape: mysql.escape
 }

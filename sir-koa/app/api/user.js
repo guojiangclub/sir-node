@@ -37,16 +37,29 @@ const wxUser = async (code) => {
     });
     return JSON.parse(wxresult.body)
 }
-const login = (ctx) => {
+const login = async(ctx) => {
     const phone = ctx.request.body.phone
+    const userId = 1
+    console.log("uid",userId)
     
+    const res = await userModel.updateUser(userId,phone)
+    
+    // const openid =ctx.request.body.openid
+    // let userId = await userModel.getUserByOpenid(openid)
+    // if(userId == 0){
+    //     userId = await userModel.createUser(openid)
+    // }
+    // const token = md5(openid)
+    // redis.set(token,{ "openid": openid,"userId":userId })
+    ctx.body = resp.succeed()
+    return
 }
 const info = (ctx) => {
 
 }
 const me = (ctx) => {
-    const openid = ctx.request.body.openid
-
+    const userId = ctx.state.userId
+    
 }
 module.exports = {
     wechatLogin, login, info, me

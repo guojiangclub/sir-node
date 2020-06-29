@@ -7,8 +7,9 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
 const index = require('./routes/index')
-const users = require('./routes/users')
+const userrouter = require('./routes/users')
 const jsonHeader = require('./middleware/jsonHeader')
+const auth = require('./middleware/auth')
 
 // error handler
 onerror(app)
@@ -35,9 +36,13 @@ app.use(async (ctx, next) => {
 
 
 app.use(jsonHeader);
+
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(userrouter.routes(), userrouter.allowedMethods())
+
+// 
+// app.use(protectedRouter.routes(), protectedRouter.allowedMethods())
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)

@@ -1,23 +1,24 @@
-const router = require('koa-router')()
+const userrouter = require('koa-router')()
 const userApi = require('../app/api/user')
-router.prefix('/user')
+const auth = require('../middleware/auth')
+userrouter.prefix('/user')
+
 //微信登录
-router.post('/wechatlogin', function (ctx, next) {
-  
+userrouter.post('/wechatlogin', function (ctx, next) {
   return userApi.wechatLogin(ctx) 
 })
 // 手机号登录
-router.post('/login', function (ctx, next) {
-  userApi.login(ctx) 
+userrouter.post('/login',auth,function (ctx, next) {
+ return userApi.login(ctx) 
 })
 //更新个人信息
-router.put('/info', function (ctx, next) {
-  userApi.info(ctx) 
+userrouter.put('/info', function (ctx, next) {
+  return userApi.info(ctx) 
 })
 //查询个人信息
-router.get('/me', function (ctx, next) {
-  userApi.me(ctx) 
+userrouter.get('/me', function (ctx, next) {
+  return userApi.me(ctx) 
 })
 
 
-module.exports = router
+module.exports = userrouter

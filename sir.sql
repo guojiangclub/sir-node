@@ -17,7 +17,7 @@ CREATE TABLE `card` (
     `user_id` int(11) NOT NULL DEFAULT 0 comment "用户id",
 	`content` VARCHAR(200) NOT NULL DEFAULT '' comment "内容",
 	`image` VARCHAR(200) NOT NULL DEFAULT '' comment "图片",
-	`praise` int(10) NOT NULL DEFAULT '' comment "点赞",
+	`praise` int(10) NOT NULL DEFAULT '0' comment "点赞",
 	PRIMARY KEY (`id`)
 )COMMENT='打卡表'
 COLLATE='utf8mb4_general_ci'
