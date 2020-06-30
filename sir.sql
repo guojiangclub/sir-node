@@ -16,13 +16,20 @@ CREATE TABLE `card` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL DEFAULT 0 comment "用户id",
 	`content` VARCHAR(200) NOT NULL DEFAULT '' comment "内容",
-	`image` VARCHAR(200) NOT NULL DEFAULT '' comment "图片",
+	`image` VARCHAR(300) NOT NULL DEFAULT '' comment "图片",
 	`praise` int(10) NOT NULL DEFAULT '0' comment "点赞",
 	PRIMARY KEY (`id`)
 )COMMENT='打卡表'
 COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB;
-
+CREATE TABLE `card_praise` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NOT NULL DEFAULT 0 comment "用户id",
+	`card_id` int(11) NOT NULL DEFAULT 0 ,
+	PRIMARY KEY (`id`)
+)COMMENT='打卡表'
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB;
 
 CREATE TABLE `test` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,

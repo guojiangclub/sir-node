@@ -22,6 +22,8 @@ const { Config } = require('../../config/mysql')
 }
 async function  queryOne(sql,params){
     const res =await exec(sql,params)
+    
+    
     return res ? res[0] : []
 }
 

@@ -12,11 +12,11 @@ userrouter.post('/login',auth,function (ctx, next) {
  return userApi.login(ctx) 
 })
 //更新个人信息
-userrouter.put('/info', function (ctx, next) {
+userrouter.put('/info', auth,function (ctx, next) {
   return userApi.info(ctx) 
 })
 //查询个人信息
-userrouter.get('/me', function (ctx, next) {
+userrouter.get('/me',auth, function (ctx, next) {
   return userApi.me(ctx) 
 })
 

@@ -53,12 +53,18 @@ const login = async(ctx) => {
     ctx.body = resp.succeed()
     return
 }
-const info = (ctx) => {
-
-}
-const me = (ctx) => {
+const info =async (ctx) => {
     const userId = ctx.state.userId
-    
+    const nickname = ctx.request.body.nickname
+    await userModel.updateUserInfo(userId,nickname)
+    ctx.body = resp.succeed()
+    return
+}
+const me =async (ctx) => {
+    const userId = ctx.state.userId
+    const user = await userModel.getUserById(userId)
+    ctx.body = resp.setData(user)
+    return
 }
 module.exports = {
     wechatLogin, login, info, me

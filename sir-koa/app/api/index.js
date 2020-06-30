@@ -1,22 +1,41 @@
 const fs = require("fs")
 const path = require("path")
+const cardModel = require('../model/cardmodel')
+const request = require('koa2-request')
+const { md5 } = require('../util/cryp')
+const response = require('../core/response')
+const Redis = require('../model/redis')
+const redis = new Redis()
+const resp = new response()
 
 
-
-const getCard = (ctx) => {
+const getCard = async(ctx) => {
     
     
 }
-const addCard = (ctx) => {
-    
-    
+const addCard = async(ctx) => {
+    const userId = ctx.state.userId
+    const content =ctx.request.body.content
+    const image =ctx.request.body.image
+    await cardModel.addCard(userId,content,image)
+    ctx.body = resp.succeed()
+    return
 }
-const praise = (ctx) => {
-    
-    
+const praise = async(ctx) => {
+    const cardId = ctx.request.body.card_id
+    const userId = ctx.state.userId
+    let id =  await cardModel.getCardPraise(cardId,userId)
+    if(id > 0){
+        ctx.body = resp.fail(20001,"不要重复点赞")
+        return
+    }
+    await cardModel.createCardPraise(cardId,userId)
+    await cardModel.incrCardPraise(cardId)
+    ctx.body = resp.succeed()
+    return
 }
-const upload = (ctx) => {
-    if ('POST' != ctx.method) return await next()
+const upload = async (ctx) => {
+    if ('POST' != ctx.method) return
     // 获取图片源
     //  <input type="file" name="file" multiple>
     const file = ctx.request.files.file
