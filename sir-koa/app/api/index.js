@@ -10,8 +10,9 @@ const resp = new response()
 
 
 const getCard = async(ctx) => {
-    
-    
+    const list = await cardModel.getCards()
+    ctx.body = resp.setData(list)
+    return
 }
 const addCard = async(ctx) => {
     const userId = ctx.state.userId
@@ -35,23 +36,27 @@ const praise = async(ctx) => {
     return
 }
 const upload = async (ctx) => {
-    if ('POST' != ctx.method) return
     // 获取图片源
     //  <input type="file" name="file" multiple>
-    const file = ctx.request.files.file
-
-    // 接收读出流
-    const reader = fs.createReadStream(file.path)
-    // 创建写入流 
-    // 3. 指定图片路径文件名（即上传图片存储目录）
-    const stream = fs.createWriteStream(path.join('public/images', file.name))
-    // 用管道将读出流 "倒给" 输入流
-    reader.pipe(stream)
-    // 4.打印上传文件在服器上存储的相对路径 
-    console.log('uploading %s -> %s', file.name, stream.path)
-    // 5.重定向到基于根目录下的静态资源web访问路径，展示图片
-    ctx.redirect(stream.path.substr(6).replace(/\\/g,'/'))
+    const file = ctx.request.files.file;
+    const fileName = file.name;
+    // 创建可读流
+    const render = fs.createReadStream(file.path);
+    let filePath = path.join('public/images',fileName);
+    const fileDir = path.join('public/images');
+    if (!fs.existsSync(fileDir)) {
+      fs.mkdirSync(fileDir, err => {
+        console.log('创建失败',err)
+      });
+      return
+    }
+    // 创建写入流
+    const upStream = fs.createWriteStream(filePath);
+    render.pipe(upStream);
+    // console.log(ctx.request.origin);
     
+    ctx.body = resp.setData({"url":ctx.request.origin+"/"+filePath }) 
+    return
 }
 module.exports = {
     getCard,addCard,praise,upload

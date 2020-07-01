@@ -10,6 +10,11 @@ const getCardPraise = async(cardId,userId)=>{
     const res = await mysql.queryOne(sql,[cardId,userId]) 
     return res.id
 }
+const getCards = async()=>{
+    let sql = "select id,content,image from `card`"
+    const res = await mysql.exec(sql) 
+    return res
+}
 const incrCardPraise = async(cardId)=>{
     let sql = "update  `card` set praise=praise+1 where id=?"
     const res = await mysql.exec(sql,[cardId]) 
@@ -21,5 +26,5 @@ const addCard = async(userId,content,image)=>{
     return insertData.insertId
 }
 module.exports = {
-    createCardPraise,incrCardPraise,getCardPraise,addCard
+    createCardPraise,incrCardPraise,getCardPraise,addCard,getCards
 }

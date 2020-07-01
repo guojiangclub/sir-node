@@ -5,11 +5,19 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-
+const path = require('path')
 const index = require('./routes/index')
 const userrouter = require('./routes/users')
 const jsonHeader = require('./middleware/jsonHeader')
 const auth = require('./middleware/auth')
+const koaBody = require('koa-body');
+
+app.use(koaBody({
+    multipart: true,
+    formidable: {
+        maxFileSize: 1200*1024*1024,	// 设置上传文件大小最大限制，默认2M
+    }
+}));
 
 // error handler
 onerror(app)
